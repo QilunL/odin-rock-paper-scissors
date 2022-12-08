@@ -5,6 +5,10 @@ function getComputerChoice(){
     return randomChoice;
 }
 
+let playerWins = 0;
+let computerWins = 0;
+let draws = 0;
+
 function playRound(playerSelection, computerSelection){
 
     playerSelection = playerSelection.toUpperCase();
@@ -12,16 +16,38 @@ function playRound(playerSelection, computerSelection){
     let computerChoice = choices.indexOf(computerSelection);
     
     if ((playerChoice - computerChoice == -1) || (playerChoice - computerChoice) == 2){
-        return "You Lose!" + computerSelection + " beats " + playerSelection;
+        alert (`You Lose this round! ${computerSelection} beats ${playerSelection}`);
+        computerWins += 1;
+        return computerWins;
     } else if((playerChoice - computerChoice == -2) || (playerChoice - computerChoice) == 1){
-        return "You Win!" + playerSelection + " beats " + computerSelection;
+        alert (`You Win this round! ${playerSelection} beats ${computerSelection}`);
+        playerWins += 1;
+        return playerWins;
     } else{
-        return "It is a draw!";
+        alert ("This round is a draw!");
+        draws += 1;
+        return draws;
     }
 
 }
 
+function game(){
+    for (let i = 0; i < 5; i++){
+        let playerSelection;
+            do {
+                playerSelection = prompt(`Game ${i + 1}: Rock, Paper or Scissors?`);
+            }
+            while(choices.includes(playerSelection.toUpperCase()) == false);
+        let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+    }
+    if (playerWins > computerWins){
+        alert (`You win!, You ${playerWins}:${computerWins} computer`);
+    } else if(computerWins > playerWins){
+        alert (`You lose!, You ${playerWins}:${computerWins} computer`);
+    } else{
+        alert (`Is is a draw!, you ${playerWins}:${computerWins} computer`);
+    }
+}
 
-const playerSelection = "scissors";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+game();
