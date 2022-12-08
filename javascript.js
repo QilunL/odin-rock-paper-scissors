@@ -32,7 +32,8 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(){
-    for (let i = 0; i < 5; i++){
+    let j = Number(prompt("How many rounds?"))
+    for (let i = 0; i < j; i++){
         let playerSelection;
             do {
                 playerSelection = prompt(`Game ${i + 1}: Rock, Paper or Scissors?`);
