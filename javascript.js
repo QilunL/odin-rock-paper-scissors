@@ -8,6 +8,7 @@ function getComputerChoice(){
 let playerWins = 0;
 let computerWins = 0;
 let draws = 0;
+const results = document.querySelector(".result");
 
 function playRound(playerSelection, computerSelection){
 
@@ -31,7 +32,7 @@ function playRound(playerSelection, computerSelection){
 
 }
 
-function game(){
+/*function game(){
     let j = Number(prompt("How many rounds?"))
     for (let i = 0; i < j; i++){
         let playerSelection;
@@ -49,6 +50,32 @@ function game(){
     } else{
         alert (`Is is a draw!, you ${playerWins}:${computerWins} computer`);
     }
+}*/
+
+function assignChoice(e){
+    playerSelection = e.target.className;
+    playRound(playerSelection, getComputerChoice());
+    results.textContent = `Results: You ${playerWins}:${computerWins} computer`;
+
+    if (playerWins + computerWins == 5){
+        declareWinner();
+        resetScore();
+    }
+}
+const playerButtons = document.querySelectorAll("button");
+playerButtons.forEach(playerButton => playerButton.addEventListener("click", assignChoice));
+
+function declareWinner(){
+    if (playerWins > computerWins){
+        alert (`You win!, You ${playerWins}:${computerWins} computer`);
+    } else if(computerWins > playerWins){
+        alert (`You lose!, You ${playerWins}:${computerWins} computer`);
+    }
 }
 
-game();
+function resetScore(){
+    playerWins = 0;
+    computerWins = 0;
+    draws = 0;
+    results.textContent = `Results: You 0:0 computer`;
+}
