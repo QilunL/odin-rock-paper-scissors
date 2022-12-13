@@ -57,7 +57,7 @@ function assignChoice(e){
     playRound(playerSelection, getComputerChoice());
     results.textContent = `Results: You ${playerWins}:${computerWins} computer`;
 
-    if (playerWins + computerWins == 5){
+    if (playerWins == 5 || computerWins == 5){
         declareWinner();
         resetScore();
     }
